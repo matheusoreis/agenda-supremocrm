@@ -2,16 +2,18 @@
 
 namespace SupremoCRM\Agenda\Core;
 
+use Closure;
+
 class Router
 {
     private static array $routes = [];
 
-    public static function get(string $uri, string $action): void
+    public static function get(string $uri, string|Closure $action): void
     {
         self::$routes['GET'][$uri] = $action;
     }
 
-    public static function post(string $uri, string $action): void
+    public static function post(string $uri, string|Closure $action): void
     {
         self::$routes['POST'][$uri] = $action;
     }
@@ -28,6 +30,7 @@ class Router
 
         foreach (self::$routes[$method] as $route => $action) {
             $pattern = preg_replace('/\{[a-z]+\}/', '([0-9]+)', $route);
+
             if (preg_match("#^$pattern$#", $uri, $matches)) {
                 array_shift($matches);
                 self::execute($action, $matches);
@@ -36,27 +39,25 @@ class Router
         }
 
         http_response_code(404);
-
         echo "404 - Página não encontrada";
     }
 
-    private static function execute(string $action, array $params = []): void
+    private static function execute(string|Closure $action, array $params = []): void
     {
-        if (is_callable($action)) {
+        if ($action instanceof Closure) {
             call_user_func_array($action, $params);
             return;
         }
 
-        if (is_string($action)) {
-            [$controller, $method] = explode('@', $action);
-            $controllerClass = "SupremoCRM\\Agenda\\Http\\Controllers\\" . $controller;
+        [$controller, $method] = explode('@', $action);
 
-            if (class_exists($controllerClass)) {
-                $instance = new $controllerClass();
-                call_user_func_array([$instance, $method], $params);
-            } else {
-                echo "Controller {$controllerClass} não encontrado!";
-            }
+        $controllerClass = "SupremoCRM\\Agenda\\Http\\Controllers\\" . $controller;
+
+        if (class_exists($controllerClass)) {
+            $instance = new $controllerClass();
+            call_user_func_array([$instance, $method], $params);
+        } else {
+            echo "Controller {$controllerClass} não encontrado!";
         }
     }
 }
