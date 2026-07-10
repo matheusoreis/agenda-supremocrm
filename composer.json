@@ -1,0 +1,17 @@
+{
+    "name": "matheus/agenda-supremocrm",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Matheus\\AgendaSupremocrm\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Matheus Reis",
+            "email": "47448206+matheusoreis@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
