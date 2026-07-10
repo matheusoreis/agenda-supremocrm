@@ -15,4 +15,17 @@ class Controller
 
         require __DIR__ . '/../../resources/views/layouts/app.php';
     }
+
+    protected function json(array $data): void
+    {
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit;
+    }
+
+    protected function redirect(string $url): void
+    {
+        header('Location: ' . $url);
+        exit;
+    }
 }
