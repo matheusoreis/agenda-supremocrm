@@ -1,10 +1,10 @@
 {
-    "name": "matheus/agenda-supremocrm",
+    "name": "supremocrm/agenda",
     "type": "project",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Matheus\\AgendaSupremocrm\\": "src/"
+            "SupremoCRM\\Agenda\\": "src/"
         }
     },
     "authors": [
