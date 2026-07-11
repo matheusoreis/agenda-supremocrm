@@ -13,5 +13,8 @@
             "email": "47448206+matheusoreis@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "scripts": {
+        "serve": "php -S localhost:8000 -t public"
+    }
 }
