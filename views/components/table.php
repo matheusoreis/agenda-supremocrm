@@ -43,7 +43,7 @@ $showTotal = $showTotal ?? true;
                 $url = '?page=' . ($page - 1) . ($search ? '&search=' . urlencode($search) : '');
                 echo render_component('button', [
                     'variant' => 'secondary',
-                    'size' => 'sm',
+                    'size' => 'md',
                     'icon' => 'chevron-left',
                     'label' => 'Anterior',
                     'onclick' => "window.location.href='{$url}'"
@@ -61,7 +61,7 @@ $showTotal = $showTotal ?? true;
                 $url = '?page=1' . ($search ? '&search=' . urlencode($search) : '');
                 echo render_component('button', [
                     'variant' => 'secondary',
-                    'size' => 'sm',
+                    'size' => 'md',
                     'label' => '1',
                     'onclick' => "window.location.href='{$url}'"
                 ]);
@@ -77,7 +77,7 @@ $showTotal = $showTotal ?? true;
                 $variant = ($i === $page) ? 'primary' : 'secondary';
                 echo render_component('button', [
                     'variant' => $variant,
-                    'size' => 'sm',
+                    'size' => 'md',
                     'label' => (string) $i,
                     'onclick' => "window.location.href='{$url}'"
                 ]);
@@ -92,7 +92,7 @@ $showTotal = $showTotal ?? true;
                 $url = '?page=' . $lastPage . ($search ? '&search=' . urlencode($search) : '');
                 echo render_component('button', [
                     'variant' => 'secondary',
-                    'size' => 'sm',
+                    'size' => 'md',
                     'label' => (string) $lastPage,
                     'onclick' => "window.location.href='{$url}'"
                 ]);
@@ -104,7 +104,7 @@ $showTotal = $showTotal ?? true;
                 $url = '?page=' . ($page + 1) . ($search ? '&search=' . urlencode($search) : '');
                 echo render_component('button', [
                     'variant' => 'secondary',
-                    'size' => 'sm',
+                    'size' => 'md',
                     'icon' => 'chevron-right',
                     'iconPosition' => 'right',
                     'label' => 'Próxima',
