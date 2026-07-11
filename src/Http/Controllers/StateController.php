@@ -82,7 +82,7 @@ class StateController extends Controller
             'abbreviation' => $data['abbreviation']
         ]);
 
-        $_SESSION['flash'] = 'Estado criado com sucesso!';
+        $_SESSION['flash'] = 'Estado criado com sucesso.';
         header('Location: /states');
         exit;
     }
@@ -129,7 +129,7 @@ class StateController extends Controller
         $data = $request->validated($_POST);
         $this->state->update($id, $data);
 
-        $_SESSION['flash'] = 'Estado atualizado com sucesso!';
+        $_SESSION['flash'] = 'Estado atualizado com sucesso.';
         header('Location: /states');
         exit;
     }
@@ -144,7 +144,7 @@ class StateController extends Controller
     public function delete(int $id)
     {
         $this->state->delete($id);
-        $_SESSION['flash'] = 'Estado excluído com sucesso!';
+        $_SESSION['flash'] = 'Estado excluído com sucesso.';
         header('Location: /states');
         exit;
     }
@@ -189,7 +189,7 @@ class StateController extends Controller
             }
         }
 
-        $_SESSION['flash'] = "Importação concluída! {$importados} estados importados, {$existentes} já existentes.";
+        $_SESSION['flash'] = "Importação concluída. {$importados} estados importados, {$existentes} já existentes.";
         header('Location: /states');
         exit;
     }

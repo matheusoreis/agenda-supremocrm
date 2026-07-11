@@ -82,7 +82,7 @@ class CityController extends Controller
         $data = $request->validated($_POST);
         $this->city->create($data);
 
-        $_SESSION['flash'] = 'Cidade criada com sucesso!';
+        $_SESSION['flash'] = 'Cidade criada com sucesso.';
         header('Location: /cities');
         exit;
     }
@@ -130,7 +130,7 @@ class CityController extends Controller
         $data = $request->validated($_POST);
         $this->city->update($id, $data);
 
-        $_SESSION['flash'] = 'Cidade atualizada com sucesso!';
+        $_SESSION['flash'] = 'Cidade atualizada com sucesso.';
         header('Location: /cities');
         exit;
     }
@@ -144,7 +144,7 @@ class CityController extends Controller
     public function delete(int $id)
     {
         $this->city->delete($id);
-        $_SESSION['flash'] = 'Cidade excluída com sucesso!';
+        $_SESSION['flash'] = 'Cidade excluída com sucesso.';
         header('Location: /cities');
         exit;
     }
@@ -159,7 +159,7 @@ class CityController extends Controller
         $states = $this->state->getAll();
 
         if (empty($states)) {
-            $_SESSION['error'] = 'Primeiro importe os estados!';
+            $_SESSION['error'] = 'Primeiro importe os estados.';
             header('Location: /cities');
             exit;
         }
@@ -190,7 +190,7 @@ class CityController extends Controller
             }
         }
 
-        $_SESSION['flash'] = "Importação concluída! {$importados} cidades importadas, {$existentes} já existentes.";
+        $_SESSION['flash'] = "Importação concluída. {$importados} cidades importadas, {$existentes} já existentes.";
         header('Location: /cities');
         exit;
     }

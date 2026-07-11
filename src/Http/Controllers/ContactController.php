@@ -84,7 +84,7 @@ class ContactController extends Controller
 
         $this->contact->create($data);
 
-        $_SESSION['flash'] = 'Contato criado com sucesso!';
+        $_SESSION['flash'] = 'Contato criado com sucesso.';
         header('Location: /contacts');
         exit;
     }
@@ -144,7 +144,7 @@ class ContactController extends Controller
         $data = $request->validated($_POST);
         $this->contact->update($id, $data);
 
-        $_SESSION['flash'] = 'Contato atualizado com sucesso!';
+        $_SESSION['flash'] = 'Contato atualizado com sucesso.';
         header('Location: /contacts');
         exit;
     }
@@ -159,7 +159,7 @@ class ContactController extends Controller
     public function delete(int $id)
     {
         $this->contact->delete($id);
-        $_SESSION['flash'] = 'Contato excluído com sucesso!';
+        $_SESSION['flash'] = 'Contato excluído com sucesso.';
         header('Location: /contacts');
         exit;
     }

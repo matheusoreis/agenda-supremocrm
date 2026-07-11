@@ -23,6 +23,16 @@ class Controller
      */
     protected function view(string $view, array $data = []): void
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $data['flash'] = $_SESSION['flash'] ?? null;
+        $data['error'] = $_SESSION['error'] ?? null;
+
+        unset($_SESSION['flash']);
+        unset($_SESSION['error']);
+
         extract($data);
 
         ob_start();
