@@ -7,6 +7,7 @@ $lastPage = $lastPage ?? 1;
 $perPage = $perPage ?? 20;
 $search = $search ?? null;
 $showPagination = $showPagination ?? ($lastPage > 1);
+$showTotal = $showTotal ?? true;
 ?>
 
 <div class="overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800">
@@ -28,18 +29,22 @@ $showPagination = $showPagination ?? ($lastPage > 1);
     </table>
 </div>
 
-<?php if ($showPagination && $lastPage > 1): ?>
-    <div class="flex items-center justify-between mt-4">
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-4">
+    <?php if ($showTotal && $total > 0): ?>
         <div class="text-sm text-zinc-500 dark:text-zinc-400">
-            <?= number_format($total, 0, ',', '.') ?> registros
+            <?= number_format($total, 0, ',', '.') ?> registro<?= $total > 1 ? 's' : '' ?>
         </div>
-        <div class="flex gap-1">
+    <?php endif; ?>
+
+    <?php if ($showPagination && $lastPage > 1): ?>
+        <div class="flex gap-1 flex-wrap justify-center">
             <?php if ($page > 1): ?>
                 <?php
                 $url = '?page=' . ($page - 1) . ($search ? '&search=' . urlencode($search) : '');
                 echo render_component('button', [
                     'variant' => 'secondary',
                     'size' => 'sm',
+                    'icon' => 'chevron-left',
                     'label' => 'Anterior',
                     'onclick' => "window.location.href='{$url}'"
                 ]);
@@ -62,7 +67,7 @@ $showPagination = $showPagination ?? ($lastPage > 1);
                 ]);
                 ?>
                 <?php if ($start > 2): ?>
-                    <span class="btn-secondary btn-sm disabled opacity-50 cursor-default">…</span>
+                    <span class="inline-flex items-center justify-center h-8 px-3 text-xs text-zinc-500 dark:text-zinc-400">…</span>
                 <?php endif; ?>
             <?php endif; ?>
 
@@ -81,7 +86,7 @@ $showPagination = $showPagination ?? ($lastPage > 1);
 
             <?php if ($end < $lastPage): ?>
                 <?php if ($end < $lastPage - 1): ?>
-                    <span class="btn-secondary btn-sm disabled opacity-50 cursor-default">…</span>
+                    <span class="inline-flex items-center justify-center h-8 px-3 text-xs text-zinc-500 dark:text-zinc-400">…</span>
                 <?php endif; ?>
                 <?php
                 $url = '?page=' . $lastPage . ($search ? '&search=' . urlencode($search) : '');
@@ -100,11 +105,13 @@ $showPagination = $showPagination ?? ($lastPage > 1);
                 echo render_component('button', [
                     'variant' => 'secondary',
                     'size' => 'sm',
+                    'icon' => 'chevron-right',
+                    'iconPosition' => 'right',
                     'label' => 'Próxima',
                     'onclick' => "window.location.href='{$url}'"
                 ]);
                 ?>
             <?php endif; ?>
         </div>
-    </div>
-<?php endif; ?>
+    <?php endif; ?>
+</div>
