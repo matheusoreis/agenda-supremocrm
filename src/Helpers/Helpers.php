@@ -1,9 +1,17 @@
 <?php
 
+/**
+ * Renderiza um componente reutilizável
+ * 
+ * @param string $name Nome do componente
+ * @param array $data Dados a serem passados para o componente
+ * 
+ * @return string HTML renderizado
+ */
 if (!function_exists('render_component')) {
     function render_component(string $name, array $data = []): string
     {
-        $componentPath = __DIR__ . "/../../resources/views/components/{$name}.php";
+        $componentPath = __DIR__ . "/../../views/components/{$name}.php";
 
         if (!file_exists($componentPath)) {
             return "<!-- Component {$name} not found -->";
@@ -17,10 +25,18 @@ if (!function_exists('render_component')) {
     }
 }
 
+/**
+ * Renderiza uma página/view
+ * 
+ * @param string $name Nome da view
+ * @param array $data Dados a serem passados para a view
+ * 
+ * @return string HTML renderizado
+ */
 if (!function_exists('render_view')) {
     function render_view(string $name, array $data = []): string
     {
-        $viewPath = __DIR__ . "/../../resources/views/pages/{$name}.php";
+        $viewPath = __DIR__ . "/../../views/pages/{$name}.php";
 
         if (!file_exists($viewPath)) {
             return "<!-- View {$name} not found -->";
@@ -33,7 +49,12 @@ if (!function_exists('render_view')) {
     }
 }
 
-
+/**
+ * Faz requisição a uma API externa
+ * 
+ * @param string $url URL da API
+ * @return array|false Retorna os dados em array ou false em caso de erro
+ */
 if (!function_exists('fetch_api')) {
     function fetch_api(string $url): array|false
     {

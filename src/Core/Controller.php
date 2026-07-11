@@ -27,11 +27,11 @@ class Controller
 
         ob_start();
 
-        require __DIR__ . '/../../resources/views/' . $view . '.php';
+        require __DIR__ . '/../../views/' . $view . '.php';
 
         $content = ob_get_clean();
 
-        require __DIR__ . '/../../resources/views/layouts/app.php';
+        require __DIR__ . '/../../views/layouts/app.php';
     }
 
     /**

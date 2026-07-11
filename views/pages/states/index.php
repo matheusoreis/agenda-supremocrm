@@ -7,7 +7,7 @@
 /** @var int $perPage */
 /** @var string|null $search */
 
-require_once __DIR__ . '/../../../../src/Helpers/helpers.php';
+require_once __DIR__ . '/../../../src/Helpers/helpers.php';
 ?>
 
 <div class="flex items-center justify-between mb-10">
