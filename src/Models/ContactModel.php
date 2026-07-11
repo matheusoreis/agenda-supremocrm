@@ -3,8 +3,14 @@
 namespace SupremoCRM\Agenda\Models;
 
 use PDO;
+
 use SupremoCRM\Agenda\Core\Database;
 
+/**
+ * Model de Contatos.
+ * 
+ * Gerencia operações CRUD e consultas para contatos
+ */
 class ContactModel
 {
     private PDO $db;
@@ -14,6 +20,13 @@ class ContactModel
         $this->db = Database::getInstance()->getConnection();
     }
 
+    /**
+     * Busca todos os contatos com dados relacionados.
+     * 
+     * @param string|null $search Termo de busca
+     * 
+     * @return array Lista de contatos
+     */
     public function getAll($search = null)
     {
         $sql = "SELECT c.*, 
@@ -44,7 +57,15 @@ class ContactModel
         return $stmt->fetchAll();
     }
 
-    // ✅ MÉTODO PAGINADO
+    /**
+     * Busca contatos com paginação.
+     * 
+     * @param string|null $search Termo de busca
+     * @param int $page Página atual
+     * @param int $perPage Itens por página
+     * 
+     * @return array Dados paginados
+     */
     public function getPaginated($search = null, $page = 1, $perPage = 20)
     {
         $offset = ($page - 1) * $perPage;
@@ -75,7 +96,6 @@ class ContactModel
 
         $sql .= " ORDER BY c.name ASC LIMIT :limit OFFSET :offset";
 
-        // Contar total
         $stmtCount = $this->db->prepare($countSql);
         if ($search) {
             $searchTerm = "%{$search}%";
@@ -84,7 +104,6 @@ class ContactModel
         $stmtCount->execute();
         $total = $stmtCount->fetch()['total'];
 
-        // Buscar dados
         $stmt = $this->db->prepare($sql);
         if ($search) {
             $searchTerm = "%{$search}%";
@@ -104,6 +123,13 @@ class ContactModel
         ];
     }
 
+    /**
+     * Busca contato por ID.
+     * 
+     * @param int $id ID do contato
+     * 
+     * @return array|false Dados do contato ou false
+     */
     public function getById(int $id)
     {
         $sql = "SELECT c.*, 
@@ -120,6 +146,13 @@ class ContactModel
         return $stmt->fetch();
     }
 
+    /**
+     * Cria um novo contato.
+     * 
+     * @param array $data Dados do contato
+     * 
+     * @return bool True em sucesso
+     */
     public function create(array $data)
     {
         $sql = "INSERT INTO contacts (name, phone, city_id, state_id) VALUES (?, ?, ?, ?)";
@@ -132,6 +165,14 @@ class ContactModel
         ]);
     }
 
+    /**
+     * Atualiza um contato.
+     * 
+     * @param int $id ID do contato
+     * @param array $data Dados atualizados
+     * 
+     * @return bool True em sucesso
+     */
     public function update(int $id, array $data)
     {
         $sql = "UPDATE contacts SET name = ?, phone = ?, city_id = ?, state_id = ? WHERE id = ?";
@@ -145,6 +186,13 @@ class ContactModel
         ]);
     }
 
+    /**
+     * Exclui um contato.
+     * 
+     * @param int $id ID do contato
+     * 
+     * @return bool True em sucesso
+     */
     public function delete(int $id)
     {
         $sql = "DELETE FROM contacts WHERE id = ?";

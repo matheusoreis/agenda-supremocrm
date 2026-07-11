@@ -3,8 +3,14 @@
 namespace SupremoCRM\Agenda\Models;
 
 use PDO;
+
 use SupremoCRM\Agenda\Core\Database;
 
+/**
+ * Model de Estados.
+ * 
+ * Gerencia operações CRUD e consultas para estados
+ */
 class StateModel
 {
     private PDO $db;
@@ -14,6 +20,13 @@ class StateModel
         $this->db = Database::getInstance()->getConnection();
     }
 
+    /**
+     * Busca todos os estados.
+     * 
+     * @param string|null $search Termo de busca
+     * 
+     * @return array Lista de estados
+     */
     public function getAll($search = null)
     {
         $sql = "SELECT * FROM states";
@@ -34,6 +47,15 @@ class StateModel
         return $stmt->fetchAll();
     }
 
+    /**
+     * Busca estados com paginação.
+     * 
+     * @param string|null $search Termo de busca
+     * @param int $page Página atual
+     * @param int $perPage Itens por página
+     * 
+     * @return array Dados paginados
+     */
     public function getPaginated($search = null, $page = 1, $perPage = 20)
     {
         $offset = ($page - 1) * $perPage;
@@ -48,7 +70,6 @@ class StateModel
 
         $sql .= " ORDER BY name LIMIT :limit OFFSET :offset";
 
-        // Contar total
         $stmtCount = $this->db->prepare($countSql);
         if ($search) {
             $searchTerm = "%{$search}%";
@@ -57,7 +78,6 @@ class StateModel
         $stmtCount->execute();
         $total = $stmtCount->fetch()['total'];
 
-        // Buscar dados
         $stmt = $this->db->prepare($sql);
         if ($search) {
             $searchTerm = "%{$search}%";
@@ -77,6 +97,13 @@ class StateModel
         ];
     }
 
+    /**
+     * Busca estado por ID.
+     * 
+     * @param int $id ID do estado
+     * 
+     * @return array|false Dados do estado ou false
+     */
     public function getById(int $id)
     {
         $stmt = $this->db->prepare("SELECT * FROM states WHERE id = ?");
@@ -84,6 +111,13 @@ class StateModel
         return $stmt->fetch();
     }
 
+    /**
+     * Busca estado por ID do IBGE.
+     * 
+     * @param int $ibgeId Código IBGE do estado
+     * 
+     * @return array|false Dados do estado ou false
+     */
     public function getByIbgeId(int $ibgeId)
     {
         $stmt = $this->db->prepare("SELECT * FROM states WHERE ibge_id = ?");
@@ -91,6 +125,13 @@ class StateModel
         return $stmt->fetch();
     }
 
+    /**
+     * Cria um novo estado.
+     * 
+     * @param array $data Dados do estado
+     * 
+     * @return bool True em sucesso
+     */
     public function create(array $data)
     {
         $sql = "INSERT INTO states (ibge_id, name, abbreviation) VALUES (?, ?, ?)";
@@ -102,6 +143,14 @@ class StateModel
         ]);
     }
 
+    /**
+     * Atualiza um estado.
+     * 
+     * @param int $id ID do estado
+     * @param array $data Dados atualizados
+     * 
+     * @return bool True em sucesso
+     */
     public function update(int $id, array $data)
     {
         $sql = "UPDATE states SET name = ?, abbreviation = ? WHERE id = ?";
@@ -109,12 +158,24 @@ class StateModel
         return $stmt->execute([$data['name'], $data['abbreviation'], $id]);
     }
 
+    /**
+     * Exclui um estado.
+     * 
+     * @param int $id ID do estado
+     * 
+     * @return bool True em sucesso
+     */
     public function delete(int $id)
     {
         $stmt = $this->db->prepare("DELETE FROM states WHERE id = ?");
         return $stmt->execute([$id]);
     }
 
+    /**
+     * Retorna a conexão PDO.
+     * 
+     * @return PDO Objeto PDO
+     */
     public function getDb()
     {
         return $this->db;
