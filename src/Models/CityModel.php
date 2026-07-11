@@ -34,6 +34,7 @@ class CityModel
         }
 
         $stmt->execute();
+
         return $stmt->fetchAll();
     }
 
@@ -75,6 +76,7 @@ class CityModel
             $searchTerm = "%{$search}%";
             $stmtCount->bindParam(':search', $searchTerm);
         }
+
         $stmtCount->execute();
         $total = $stmtCount->fetch()['total'];
 
@@ -83,6 +85,7 @@ class CityModel
             $searchTerm = "%{$search}%";
             $stmt->bindParam(':search', $searchTerm);
         }
+
         $stmt->bindParam(':limit', $perPage, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();

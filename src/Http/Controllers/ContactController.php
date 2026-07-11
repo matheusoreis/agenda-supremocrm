@@ -25,7 +25,7 @@ class ContactController extends Controller
     {
         $search = $_GET['search'] ?? null;
         $page = (int) ($_GET['page'] ?? 1);
-        $perPage = 20;
+        $perPage = 10;
 
         $result = $this->contact->getPaginated($search, $page, $perPage);
 

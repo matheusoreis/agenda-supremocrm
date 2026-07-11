@@ -35,8 +35,15 @@ $showPagination = $showPagination ?? ($lastPage > 1);
         </div>
         <div class="flex gap-1">
             <?php if ($page > 1): ?>
-                <a href="?page=<?= $page - 1 ?><?= $search ? '&search=' . urlencode($search) : '' ?>"
-                    class="btn-secondary btn-sm">Anterior</a>
+                <?php
+                $url = '?page=' . ($page - 1) . ($search ? '&search=' . urlencode($search) : '');
+                echo render_component('button', [
+                    'variant' => 'secondary',
+                    'size' => 'sm',
+                    'label' => 'Anterior',
+                    'onclick' => "window.location.href='{$url}'"
+                ]);
+                ?>
             <?php endif; ?>
 
             <?php
@@ -45,31 +52,58 @@ $showPagination = $showPagination ?? ($lastPage > 1);
             ?>
 
             <?php if ($start > 1): ?>
-                <a href="?page=1<?= $search ? '&search=' . urlencode($search) : '' ?>"
-                    class="btn-secondary btn-sm">1</a>
+                <?php
+                $url = '?page=1' . ($search ? '&search=' . urlencode($search) : '');
+                echo render_component('button', [
+                    'variant' => 'secondary',
+                    'size' => 'sm',
+                    'label' => '1',
+                    'onclick' => "window.location.href='{$url}'"
+                ]);
+                ?>
                 <?php if ($start > 2): ?>
                     <span class="btn-secondary btn-sm disabled opacity-50 cursor-default">…</span>
                 <?php endif; ?>
             <?php endif; ?>
 
             <?php for ($i = $start; $i <= $end; $i++): ?>
-                <a href="?page=<?= $i ?><?= $search ? '&search=' . urlencode($search) : '' ?>"
-                    class="<?= $i === $page ? 'btn-primary' : 'btn-secondary' ?> btn-sm">
-                    <?= $i ?>
-                </a>
+                <?php
+                $url = '?page=' . $i . ($search ? '&search=' . urlencode($search) : '');
+                $variant = ($i === $page) ? 'primary' : 'secondary';
+                echo render_component('button', [
+                    'variant' => $variant,
+                    'size' => 'sm',
+                    'label' => (string) $i,
+                    'onclick' => "window.location.href='{$url}'"
+                ]);
+                ?>
             <?php endfor; ?>
 
             <?php if ($end < $lastPage): ?>
                 <?php if ($end < $lastPage - 1): ?>
                     <span class="btn-secondary btn-sm disabled opacity-50 cursor-default">…</span>
                 <?php endif; ?>
-                <a href="?page=<?= $lastPage ?><?= $search ? '&search=' . urlencode($search) : '' ?>"
-                    class="btn-secondary btn-sm"><?= $lastPage ?></a>
+                <?php
+                $url = '?page=' . $lastPage . ($search ? '&search=' . urlencode($search) : '');
+                echo render_component('button', [
+                    'variant' => 'secondary',
+                    'size' => 'sm',
+                    'label' => (string) $lastPage,
+                    'onclick' => "window.location.href='{$url}'"
+                ]);
+                ?>
             <?php endif; ?>
 
             <?php if ($page < $lastPage): ?>
-                <a href="?page=<?= $page + 1 ?><?= $search ? '&search=' . urlencode($search) : '' ?>"
-                    class="btn-secondary btn-sm">Próxima</a>
+                <?php
+                $url = '?page=' . ($page + 1) . ($search ? '&search=' . urlencode($search) : '');
+                echo render_component('button', [
+                    'variant' => 'secondary',
+                    'size' => 'sm',
+                    'label' => 'Próxima',
+                    'onclick' => "window.location.href='{$url}'"
+                ]);
+                ?>
             <?php endif; ?>
         </div>
     </div>
