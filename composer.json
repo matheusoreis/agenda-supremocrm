@@ -15,6 +15,9 @@
     ],
     "require": {},
     "scripts": {
-        "serve": "php -S localhost:8000 -t public"
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "php -S localhost:8000 -t public"
+        ]
     }
 }
