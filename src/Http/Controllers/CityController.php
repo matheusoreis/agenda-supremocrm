@@ -5,11 +5,15 @@ namespace SupremoCRM\Agenda\Http\Controllers;
 use SupremoCRM\Agenda\Core\Controller;
 use SupremoCRM\Agenda\Models\CityModel;
 use SupremoCRM\Agenda\Models\StateModel;
-use SupremoCRM\Agenda\Models\ContactModel;
 use SupremoCRM\Agenda\Http\Requests\CityRequest;
 
 require_once __DIR__ . '/../../Helpers/helpers.php';
 
+/**
+ * Controller de Cidades.
+ * 
+ * Gerencia as operações relacionadas a cidades
+ */
 class CityController extends Controller
 {
     private CityModel $city;
@@ -21,6 +25,11 @@ class CityController extends Controller
         $this->state = new StateModel();
     }
 
+    /**
+     * Lista todas as cidades com paginação.
+     * 
+     * @return void
+     */
     public function index()
     {
         $search = $_GET['search'] ?? null;
@@ -39,12 +48,22 @@ class CityController extends Controller
         ]);
     }
 
+    /**
+     * Exibe formulário de criação de cidade.
+     * 
+     * @return void
+     */
     public function create()
     {
         $states = $this->state->getAll();
         $this->view('pages/cities/create', ['states' => $states, 'errors' => []]);
     }
 
+    /**
+     * Salva uma nova cidade.
+     * 
+     * @return void
+     */
     public function store()
     {
         $request = new CityRequest();
@@ -68,6 +87,12 @@ class CityController extends Controller
         exit;
     }
 
+    /**
+     * Exibe formulário de edição de cidade.
+     * 
+     * @param int $id ID da cidade
+     * @return void
+     */
     public function edit(int $id)
     {
         $city = $this->city->getById($id);
@@ -81,6 +106,12 @@ class CityController extends Controller
         $this->view('pages/cities/edit', ['city' => $city, 'states' => $states, 'errors' => []]);
     }
 
+    /**
+     * Atualiza uma cidade.
+     * 
+     * @param int $id ID da cidade
+     * @return void
+     */
     public function update(int $id)
     {
         $request = new CityRequest();
@@ -104,6 +135,12 @@ class CityController extends Controller
         exit;
     }
 
+    /**
+     * Exclui uma cidade.
+     * 
+     * @param int $id ID da cidade
+     * @return void
+     */
     public function delete(int $id)
     {
         $this->city->delete($id);
@@ -112,6 +149,11 @@ class CityController extends Controller
         exit;
     }
 
+    /**
+     * Importa cidades da API do IBGE.
+     * 
+     * @return void
+     */
     public function import()
     {
         $states = $this->state->getAll();

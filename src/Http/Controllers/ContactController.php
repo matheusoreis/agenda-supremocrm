@@ -8,6 +8,11 @@ use SupremoCRM\Agenda\Models\StateModel;
 use SupremoCRM\Agenda\Models\CityModel;
 use SupremoCRM\Agenda\Http\Requests\ContactRequest;
 
+/**
+ * Controller de Contatos.
+ * 
+ * Gerencia as operações relacionadas a contatos
+ */
 class ContactController extends Controller
 {
     private ContactModel $contact;
@@ -21,6 +26,11 @@ class ContactController extends Controller
         $this->city = new CityModel();
     }
 
+    /**
+     * Lista todos os contatos com paginação.
+     * 
+     * @return void
+     */
     public function index()
     {
         $search = $_GET['search'] ?? null;
@@ -39,12 +49,22 @@ class ContactController extends Controller
         ]);
     }
 
+    /**
+     * Exibe formulário de criação de contato.
+     * 
+     * @return void
+     */
     public function create()
     {
         $states = $this->state->getAll();
         $this->view('pages/contacts/create', ['states' => $states, 'errors' => []]);
     }
 
+    /**
+     * Salva um novo contato.
+     * 
+     * @return void
+     */
     public function store()
     {
         $request = new ContactRequest();
@@ -69,6 +89,13 @@ class ContactController extends Controller
         exit;
     }
 
+    /**
+     * Exibe formulário de edição de contato.
+     * 
+     * @param int $id ID do contato
+     * 
+     * @return void
+     */
     public function edit(int $id)
     {
         $contact = $this->contact->getById($id);
@@ -89,6 +116,13 @@ class ContactController extends Controller
         ]);
     }
 
+    /**
+     * Atualiza um contato.
+     * 
+     * @param int $id ID do contato
+     * 
+     * @return void
+     */
     public function update(int $id)
     {
         $request = new ContactRequest();
@@ -115,6 +149,13 @@ class ContactController extends Controller
         exit;
     }
 
+    /**
+     * Exclui um contato.
+     * 
+     * @param int $id ID do contato
+     * 
+     * @return void
+     */
     public function delete(int $id)
     {
         $this->contact->delete($id);
@@ -123,6 +164,11 @@ class ContactController extends Controller
         exit;
     }
 
+    /**
+     * Retorna cidades de um estado via JSON.
+     * 
+     * @return void
+     */
     public function getCities()
     {
         $stateId = $_GET['state_id'] ?? 0;

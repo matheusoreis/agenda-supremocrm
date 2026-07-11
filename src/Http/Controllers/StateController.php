@@ -10,6 +10,11 @@ use SupremoCRM\Agenda\Http\Requests\StateRequest;
 
 require_once __DIR__ . '/../../Helpers/helpers.php';
 
+/**
+ * Controller de Estados.
+ * 
+ * Gerencia as operações relacionadas a estados
+ */
 class StateController extends Controller
 {
     private StateModel $state;
@@ -19,6 +24,11 @@ class StateController extends Controller
         $this->state = new StateModel();
     }
 
+    /**
+     * Lista todos os estados com paginação.
+     * 
+     * @return void
+     */
     public function index()
     {
         $search = $_GET['search'] ?? null;
@@ -37,11 +47,21 @@ class StateController extends Controller
         ]);
     }
 
+    /**
+     * Exibe formulário de criação de estado.
+     * 
+     * @return void
+     */
     public function create()
     {
         $this->view('pages/states/create', ['errors' => []]);
     }
 
+    /**
+     * Salva um novo estado.
+     * 
+     * @return void
+     */
     public function store()
     {
         $request = new StateRequest();
@@ -67,6 +87,13 @@ class StateController extends Controller
         exit;
     }
 
+    /**
+     * Exibe formulário de edição de estado.
+     * 
+     * @param int $id ID do estado
+     * 
+     * @return void
+     */
     public function edit(int $id)
     {
         $state = $this->state->getById($id);
@@ -79,6 +106,13 @@ class StateController extends Controller
         $this->view('pages/states/edit', ['state' => $state, 'errors' => []]);
     }
 
+    /**
+     * Atualiza um estado.
+     * 
+     * @param int $id ID do estado
+     * 
+     * @return void
+     */
     public function update(int $id)
     {
         $request = new StateRequest();
@@ -100,6 +134,13 @@ class StateController extends Controller
         exit;
     }
 
+    /**
+     * Exclui um estado.
+     * 
+     * @param int $id ID do estado
+     * 
+     * @return void
+     */
     public function delete(int $id)
     {
         $this->state->delete($id);
@@ -108,6 +149,11 @@ class StateController extends Controller
         exit;
     }
 
+    /**
+     * Importa estados da API do IBGE.
+     * 
+     * @return void
+     */
     public function import()
     {
         $estados = fetch_api('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
