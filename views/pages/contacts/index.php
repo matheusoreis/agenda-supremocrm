@@ -14,9 +14,6 @@ require_once __DIR__ . '/../../../src/Helpers/helpers.php';
     <h2 class="text-xl font-semibold flex items-center gap-2">
         <?= render_component('icon', ['name' => 'users', 'class' => 'w-5 h-5']) ?>
         Contatos
-        <span class="text-sm font-normal text-zinc-500 dark:text-zinc-400">
-            (<?= number_format($total, 0, ',', '.') ?> total)
-        </span>
     </h2>
 
     <?= render_component('button', [

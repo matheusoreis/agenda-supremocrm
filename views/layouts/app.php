@@ -111,6 +111,7 @@
             <?php
             $type = 'success';
             $message = $flash;
+            $dismissible = true;
             include __DIR__ . '/../components/alert.php';
             ?>
         <?php endif; ?>
@@ -119,6 +120,7 @@
             <?php
             $type = 'error';
             $message = $error;
+            $dismissible = true;
             include __DIR__ . '/../components/alert.php';
             ?>
         <?php endif; ?>

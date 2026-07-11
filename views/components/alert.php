@@ -3,10 +3,12 @@ $message = $message ?? null;
 $type = $type ?? 'info';
 $dismissible = $dismissible ?? false;
 $icon = $icon ?? null;
+
+$alertId = 'alert-' . uniqid();
 ?>
 
 <?php if ($message): ?>
-    <div class="mb-4 rounded-md border px-4 ? py-3 text-sm 
+    <div id="<?= $alertId ?>" class="mb-4 rounded-md border px-4 py-3 text-sm flex items-center justify-between
         <?php if ($type === 'success'): ?>
             border-green-200 bg-green-50 text-green-800 dark:border-green-900 dark:bg-green-950 dark:text-green-300
         <?php elseif ($type === 'danger' || $type === 'error'): ?>
@@ -17,14 +19,23 @@ $icon = $icon ?? null;
             border-blue-200 bg-blue-50 text-blue-800 dark:border-blue-900 dark:bg-blue-950 dark:text-blue-300
         <?php endif; ?>
     ">
+        <div class="flex items-center gap-2">
+            <?php if ($icon): ?>
+                <span><?= $icon ?></span>
+            <?php endif; ?>
+            <span><?= htmlspecialchars($message) ?></span>
+        </div>
+
         <?php if ($dismissible): ?>
-            <button class="float-right text-lg leading-none" onclick="this.parentElement.remove()">×</button>
+            <?php
+            $variant = 'ghost';
+            $size = 'sm';
+            $icon = 'x';
+            $type = 'button';
+            $class = 'h-6 w-6 p-0 text-current hover:bg-transparent opacity-70 hover:opacity-100 flex-shrink-0';
+            $onclick = "document.getElementById('{$alertId}').remove()";
+            include __DIR__ . '/button.php';
+            ?>
         <?php endif; ?>
-
-        <?php if ($icon): ?>
-            <span class="mr-2"><?= $icon ?></span>
-        <?php endif; ?>
-
-        <?= htmlspecialchars($message) ?>
     </div>
 <?php endif; ?>
