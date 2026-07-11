@@ -2,8 +2,20 @@
 
 namespace SupremoCRM\Agenda\Http\Requests;
 
+/**
+ * Request de Cidade.
+ * 
+ * Valida e sanitiza os dados recebidos para cidade
+ */
 class CityRequest
 {
+    /**
+     * Valida os dados da requisição.
+     * 
+     * @param array $data Dados a serem validados
+     * 
+     * @return array Lista de erros encontrados
+     */
     public function validate(array $data)
     {
         $errors = [];
@@ -19,6 +31,13 @@ class CityRequest
         return $errors;
     }
 
+    /**
+     * Retorna os dados validados e sanitizados.
+     * 
+     * @param array $data Dados originais
+     * 
+     * @return array Dados processados
+     */
     public function validated(array $data)
     {
         return [
