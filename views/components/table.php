@@ -31,7 +31,7 @@ $showPagination = $showPagination ?? ($lastPage > 1);
 <?php if ($showPagination && $lastPage > 1): ?>
     <div class="flex items-center justify-between mt-4">
         <div class="text-sm text-zinc-500 dark:text-zinc-400">
-            Mostrando <?= $perPage ?> de <?= number_format($total, 0, ',', '.') ?> registros
+            <?= number_format($total, 0, ',', '.') ?> registros
         </div>
         <div class="flex gap-1">
             <?php if ($page > 1): ?>
