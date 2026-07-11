@@ -4,7 +4,7 @@ namespace SupremoCRM\Agenda\Core;
 
 
 /**
- * Classe base Controller
+ * Base para os Controllers
  * 
  * Fornece métodos auxiliares para todos os controllers.
  */
