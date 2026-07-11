@@ -58,21 +58,22 @@
 <body class="min-h-screen">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6">
 
-        <nav class="flex items-center justify-between mb-6">
-            <a href="/contacts" class="flex items-center gap-2 font-semibold text-lg">
+        <nav class="flex items-center justify-between gap-2 mb-6">
+            <a href="/contacts" class="flex items-center gap-2 font-semibold text-lg shrink-0">
                 <?php
                 $name = 'album';
-                $class = 'w-8 h-8';
+                $class = 'w-7 h-7 sm:w-8 sm:h-8';
                 include __DIR__ . '/../components/icon.php';
                 ?>
             </a>
 
-            <div class="flex items-center gap-1">
+            <div class="flex items-center gap-1 overflow-x-auto">
                 <?php
                 $variant = 'outline';
                 $size = 'md';
                 $icon = 'users';
                 $label = 'Contatos';
+                $labelClass = 'hidden sm:inline';
                 $onclick = "window.location.href='/contacts'";
                 include __DIR__ . '/../components/button.php';
                 ?>
@@ -82,6 +83,7 @@
                 $size = 'md';
                 $icon = 'map-pin';
                 $label = 'Estados';
+                $labelClass = 'hidden sm:inline';
                 $onclick = "window.location.href='/states'";
                 include __DIR__ . '/../components/button.php';
                 ?>
@@ -91,6 +93,7 @@
                 $size = 'md';
                 $icon = 'building-2';
                 $label = 'Cidades';
+                $labelClass = 'hidden sm:inline';
                 $onclick = "window.location.href='/cities'";
                 include __DIR__ . '/../components/button.php';
                 ?>

@@ -10,7 +10,7 @@
 require_once __DIR__ . '/../../../src/Helpers/helpers.php';
 ?>
 
-<div class="flex items-center justify-between mb-10">
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-8 sm:mb-10">
     <h2 class="text-xl font-semibold flex items-center gap-2">
         <?= render_component('icon', ['name' => 'users', 'class' => 'w-5 h-5']) ?>
         Contatos
@@ -26,7 +26,7 @@ require_once __DIR__ . '/../../../src/Helpers/helpers.php';
 </div>
 
 <div class="flex gap-2 mb-4">
-    <form method="GET" action="/contacts" class="flex gap-2 w-full">
+    <form method="GET" action="/contacts" class="flex flex-col sm:flex-row gap-2 w-full">
         <div class="flex-1">
             <?= render_component('input', [
                 'id' => 'search',
@@ -37,21 +37,26 @@ require_once __DIR__ . '/../../../src/Helpers/helpers.php';
             ]) ?>
         </div>
 
-        <?= render_component('button', [
-            'variant' => 'primary',
-            'size' => 'md',
-            'icon' => 'search',
-            'label' => 'Buscar',
-            'type' => 'submit'
-        ]) ?>
+        <div class="flex gap-2">
+            <div class="flex-1">
+                <?= render_component('button', [
+                    'variant' => 'primary',
+                    'size' => 'md',
+                    'icon' => 'search',
+                    'label' => 'Buscar',
+                    'type' => 'submit',
+                    'extraClass' => 'w-full'
+                ]) ?>
+            </div>
 
-        <?= render_component('button', [
-            'variant' => 'destructive',
-            'size' => 'md',
-            'icon' => 'x',
-            'label' => 'Limpar',
-            'onclick' => "window.location.href='/contacts'"
-        ]) ?>
+            <?= render_component('button', [
+                'variant' => 'destructive',
+                'size' => 'md',
+                'icon' => 'x',
+                'label' => 'Limpar',
+                'onclick' => "window.location.href='/contacts'"
+            ]) ?>
+        </div>
     </form>
 </div>
 

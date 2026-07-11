@@ -10,8 +10,8 @@ $showPagination = $showPagination ?? ($lastPage > 1);
 $showTotal = $showTotal ?? true;
 ?>
 
-<div class="overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800">
-    <table class="w-full text-sm">
+<div class="overflow-x-auto rounded-lg border border-zinc-200 dark:border-zinc-800">
+    <table class="w-full min-w-[640px] text-sm">
         <?php if (!empty($headers)): ?>
             <thead>
                 <tr class="border-b border-zinc-200 bg-zinc-50/50 text-left text-xs uppercase tracking-wide text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900/50 dark:text-zinc-400">

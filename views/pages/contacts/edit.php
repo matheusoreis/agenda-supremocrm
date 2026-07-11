@@ -9,7 +9,7 @@ require_once __DIR__ . '/../../../src/Helpers/helpers.php';
 ?>
 
 <div class="w-full">
-    <div class="flex items-center justify-between mb-6">
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
         <h2 class="text-xl font-semibold flex items-center gap-2">
             <?= render_component('icon', ['name' => 'pencil', 'class' => 'w-5 h-5']) ?>
             Editar Contato
@@ -99,13 +99,16 @@ require_once __DIR__ . '/../../../src/Helpers/helpers.php';
         </div>
 
         <div class="flex gap-2 pt-2">
-            <?= render_component('button', [
-                'variant' => 'primary',
-                'size' => 'md',
-                'icon' => 'save',
-                'label' => 'Atualizar',
-                'type' => 'submit'
-            ]) ?>
+            <div class="flex-1">
+                <?= render_component('button', [
+                    'variant' => 'primary',
+                    'size' => 'md',
+                    'icon' => 'save',
+                    'label' => 'Atualizar',
+                    'type' => 'submit',
+                    'extraClass' => 'w-full'
+                ]) ?>
+            </div>
 
             <?= render_component('button', [
                 'variant' => 'secondary',

@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../src/Helpers/helpers.php';
 ?>
 
 <div class="w-full">
-    <div class="flex items-center justify-between mb-6">
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
         <h2 class="text-xl font-semibold flex items-center gap-2">
             <?= render_component('icon', ['name' => 'building-2-plus', 'class' => 'w-5 h-5']) ?>
             Nova Cidade

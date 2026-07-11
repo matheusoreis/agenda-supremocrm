@@ -8,6 +8,8 @@ $onclick = $onclick ?? '';
 $icon = $icon ?? null;
 $iconPosition = $iconPosition ?? 'left';
 $label = $label ?? '';
+$labelClass = $labelClass ?? '';
+$extraClass = $extraClass ?? '';
 
 $variants = [
     'primary' => 'btn-primary',
@@ -26,6 +28,7 @@ $sizes = [
 $classes = 'inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 focus-visible:ring-offset-2 dark:focus-visible:ring-zinc-300 dark:focus-visible:ring-offset-zinc-950 disabled:pointer-events-none disabled:opacity-50';
 $classes .= ' ' . ($variants[$variant] ?? $variants['primary']);
 $classes .= ' ' . ($sizes[$size] ?? $sizes['md']);
+$classes .= ' ' . $extraClass;
 ?>
 
 <button
@@ -44,7 +47,11 @@ $classes .= ' ' . ($sizes[$size] ?? $sizes['md']);
     <?php endif; ?>
 
     <?php if ($label): ?>
-        <?= $label ?>
+        <?php if ($labelClass): ?>
+            <span class="<?= $labelClass ?>"><?= $label ?></span>
+        <?php else: ?>
+            <?= $label ?>
+        <?php endif; ?>
     <?php endif; ?>
 
     <?php if ($icon && $iconPosition === 'right'): ?>
@@ -57,5 +64,5 @@ $classes .= ' ' . ($sizes[$size] ?? $sizes['md']);
 </button>
 
 <?php
-unset($variant, $size, $type, $id, $onclick, $icon, $iconPosition, $label, $slot, $disabled);
+unset($variant, $size, $type, $id, $onclick, $icon, $iconPosition, $label, $labelClass, $extraClass, $slot, $disabled);
 ?>
