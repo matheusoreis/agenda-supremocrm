@@ -33,3 +33,14 @@ O comando acima sobe um servidor local com `php -S localhost:8000 -t public`.
 - Separação clara de responsabilidades sem depender de framework.
 - Integração com API externa com tratamento de erros e prevenção de dados duplicados.
 - Componentização de UI em PHP puro, reduzindo repetição entre as telas.
+
+## Capturas de tela
+
+![Contatos Dark Mode](https://i.imgur.com/rW3Zmkn.png)
+![Contatos White Mode](https://i.imgur.com/kbcRbOP.png)
+
+![Estados Dark Mode](https://i.imgur.com/6bZJfvO.png)
+![Estados White Mode](https://i.imgur.com/deAqX6J.png)
+
+![Cidades Dark Mode](https://i.imgur.com/bsfiTas.png)
+![Cidades White Mode](https://i.imgur.com/qTifBGP.png)
