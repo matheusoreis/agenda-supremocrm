@@ -1,7 +1,13 @@
 <?php
+
 $variant = $variant ?? 'primary';
 $size = $size ?? 'md';
 $type = $type ?? 'button';
+$id = $id ?? '';
+$onclick = $onclick ?? '';
+$icon = $icon ?? null;
+$iconPosition = $iconPosition ?? 'left';
+$label = $label ?? '';
 
 $variants = [
     'primary' => 'btn-primary',
@@ -11,6 +17,7 @@ $variants = [
 ];
 
 $sizes = [
+    'icon' => 'h-9 px-4 py-2 text-sm',
     'sm' => 'h-8 px-3 text-xs',
     'md' => 'h-9 px-4 py-2 text-sm',
     'lg' => 'h-10 px-6 text-base',
@@ -21,8 +28,34 @@ $classes .= ' ' . ($variants[$variant] ?? $variants['primary']);
 $classes .= ' ' . ($sizes[$size] ?? $sizes['md']);
 ?>
 
-<button type="<?= $type ?>" class="<?= $classes ?>"
-    <?= isset($onclick) ? "onclick='{$onclick}'" : '' ?>
+<button
+    type="<?= $type ?>"
+    class="<?= $classes ?>"
+    id="<?= $id ?>"
+    <?= $onclick ? "onclick=\"{$onclick}\"" : '' ?>
     <?= isset($disabled) && $disabled ? 'disabled' : '' ?>>
-    <?= $slot ?? '' ?>
+
+    <?php if ($icon && $iconPosition === 'left'): ?>
+        <?php
+        $name = $icon;
+        $class = 'w-4 h-4';
+        include __DIR__ . '/icon.php';
+        ?>
+    <?php endif; ?>
+
+    <?php if ($label): ?>
+        <?= $label ?>
+    <?php endif; ?>
+
+    <?php if ($icon && $iconPosition === 'right'): ?>
+        <?php
+        $name = $icon;
+        $class = 'w-4 h-4';
+        include __DIR__ . '/icon.php';
+        ?>
+    <?php endif; ?>
 </button>
+
+<?php
+unset($variant, $size, $type, $id, $onclick, $icon, $iconPosition, $label, $slot, $disabled);
+?>

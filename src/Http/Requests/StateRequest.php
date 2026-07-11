@@ -4,7 +4,7 @@ namespace SupremoCRM\Agenda\Http\Requests;
 
 class StateRequest
 {
-    public function validate($data)
+    public function validate(array $data)
     {
         $errors = [];
 
@@ -21,7 +21,7 @@ class StateRequest
         return $errors;
     }
 
-    public function validated($data)
+    public function validated(array $data)
     {
         return [
             'name' => trim($data['name']),

@@ -24,15 +24,17 @@ class ContactController extends Controller
     public function index()
     {
         $search = $_GET['search'] ?? null;
+        $page = (int) ($_GET['page'] ?? 1);
+        $perPage = 20;
 
-        $contacts = $this->contact->getAll($search);
-        $states = $this->state->getAll();
-        $cities = $this->city->getAll();
+        $result = $this->contact->getPaginated($search, $page, $perPage);
 
         $this->view('pages/contacts/index', [
-            'contacts' => $contacts,
-            'states' => $states,
-            'cities' => $cities,
+            'contacts' => $result['data'],
+            'total' => $result['total'],
+            'page' => $result['page'],
+            'lastPage' => $result['lastPage'],
+            'perPage' => $result['perPage'],
             'search' => $search
         ]);
     }
@@ -59,8 +61,10 @@ class ContactController extends Controller
         }
 
         $data = $request->validated($_POST);
+
         $this->contact->create($data);
 
+        $_SESSION['flash'] = 'Contato criado com sucesso!';
         header('Location: /contacts');
         exit;
     }
@@ -106,6 +110,7 @@ class ContactController extends Controller
         $data = $request->validated($_POST);
         $this->contact->update($id, $data);
 
+        $_SESSION['flash'] = 'Contato atualizado com sucesso!';
         header('Location: /contacts');
         exit;
     }
@@ -113,15 +118,9 @@ class ContactController extends Controller
     public function delete(int $id)
     {
         $this->contact->delete($id);
+        $_SESSION['flash'] = 'Contato excluído com sucesso!';
         header('Location: /contacts');
         exit;
-    }
-
-    public function search()
-    {
-        $search = $_GET['search'] ?? '';
-        $contacts = $this->contact->getAll($search);
-        $this->view('pages/contacts/_table_rows', ['contacts' => $contacts]);
     }
 
     public function getCities()

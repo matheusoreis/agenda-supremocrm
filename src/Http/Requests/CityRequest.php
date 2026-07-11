@@ -4,7 +4,7 @@ namespace SupremoCRM\Agenda\Http\Requests;
 
 class CityRequest
 {
-    public function validate($data)
+    public function validate(array $data)
     {
         $errors = [];
 
@@ -19,7 +19,7 @@ class CityRequest
         return $errors;
     }
 
-    public function validated($data)
+    public function validated(array $data)
     {
         return [
             'name' => trim($data['name']),

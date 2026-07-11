@@ -4,30 +4,30 @@ namespace SupremoCRM\Agenda\Http\Requests;
 
 class ContactRequest
 {
-    public function validate($data)
+    public function validate(array $data)
     {
         $errors = [];
 
         if (empty(trim($data['name'] ?? ''))) {
-            $errors['name'] = 'Nome é obrigatório.';
+            $errors[] = 'Nome é obrigatório.';
         }
 
         if (empty(trim($data['phone'] ?? ''))) {
-            $errors['phone'] = 'Telefone é obrigatório.';
+            $errors[] = 'Telefone é obrigatório.';
         }
 
         if (empty((int) ($data['state_id'] ?? 0))) {
-            $errors['state_id'] = 'Estado é obrigatório.';
+            $errors[] = 'Estado é obrigatório.';
         }
 
         if (empty((int) ($data['city_id'] ?? 0))) {
-            $errors['city_id'] = 'Cidade é obrigatória.';
+            $errors[] = 'Cidade é obrigatória.';
         }
 
         return $errors;
     }
 
-    public function validated($data)
+    public function validated(array $data)
     {
         return [
             'name' => trim($data['name']),

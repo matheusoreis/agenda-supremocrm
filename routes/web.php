@@ -8,7 +8,6 @@ Router::post('contacts/store', 'ContactController@store');
 Router::get('contacts/{id}/edit', 'ContactController@edit');
 Router::post('contacts/{id}/update', 'ContactController@update');
 Router::get('contacts/{id}/delete', 'ContactController@delete');
-Router::get('contacts/search', 'ContactController@search');
 Router::get('contacts/cities', 'ContactController@getCities');
 
 Router::get('states', 'StateController@index');
@@ -17,6 +16,7 @@ Router::post('states/store', 'StateController@store');
 Router::get('states/{id}/edit', 'StateController@edit');
 Router::post('states/{id}/update', 'StateController@update');
 Router::get('states/{id}/delete', 'StateController@delete');
+Router::get('states/import', 'StateController@import');
 
 Router::get('cities', 'CityController@index');
 Router::get('cities/create', 'CityController@create');
@@ -24,6 +24,7 @@ Router::post('cities/store', 'CityController@store');
 Router::get('cities/{id}/edit', 'CityController@edit');
 Router::post('cities/{id}/update', 'CityController@update');
 Router::get('cities/{id}/delete', 'CityController@delete');
+Router::get('cities/import', 'CityController@import');
 
 Router::get('', function () {
     header('Location: /contacts');
